@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JenJeljea Website</title>
+    <title>Ranoa Online Orders</title>
     <link rel="stylesheet" href="styles.css">
 </style>
 <script>
     function calculateTotal() {
         const sagingPrice = 70;
+        const bitterGourdPrice = 70;
+        const kangkongPrice = 15;
+
         const sagingQuantity = parseInt(document.getElementById('saging-quantity').value) || 0;
-        const totalPayment = sagingPrice * sagingQuantity;
+        const bitterGourdQuantity = parseInt(document.getElementById('bitter-gourd-quantity').value) || 0;
+        const kangkongQuantity = parseInt(document.getElementById('kangkong-quantity').value) || 0;
+
+        const totalPayment = (sagingPrice * sagingQuantity) + (bitterGourdPrice * bitterGourdQuantity) + (kangkongPrice * kangkongQuantity);
         const totalPaymentMessage = `You have a total of ₱${totalPayment}. Please prepare your ₱${totalPayment} cash. Thank You!`;
 
         document.getElementById('total-payment').innerText = totalPaymentMessage;
@@ -18,10 +24,14 @@
 
     function appendOrderDetails(event) {
         event.preventDefault();
-        const sagingQuantity = parseInt(document.getElementById('saging-quantity').value) || 0;
-        const totalPayment = 70 * sagingQuantity;
 
-        const orderDetails = `Saging Quantity: ${sagingQuantity}\nTotal Payment: ₱${totalPayment}`;
+        const sagingQuantity = parseInt(document.getElementById('saging-quantity').value) || 0;
+        const bitterGourdQuantity = parseInt(document.getElementById('bitter-gourd-quantity').value) || 0;
+        const kangkongQuantity = parseInt(document.getElementById('kangkong-quantity').value) || 0;
+
+        const totalPayment = (70 * sagingQuantity) + (70 * bitterGourdQuantity) + (15 * kangkongQuantity);
+
+        const orderDetails = `Saging Quantity: ${sagingQuantity}\nBitter Gourd Quantity: ${bitterGourdQuantity}\nKangkong Quantity: ${kangkongQuantity}\nTotal Payment: ₱${totalPayment}`;
         document.getElementById('order-details').value = orderDetails;
 
         // Sending the form data to Formspree
@@ -46,9 +56,12 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('saging-quantity').addEventListener('input', calculateTotal);
+        document.getElementById('bitter-gourd-quantity').addEventListener('input', calculateTotal);
+        document.getElementById('kangkong-quantity').addEventListener('input', calculateTotal);
         document.getElementById('order-form').addEventListener('submit', appendOrderDetails);
     });
 </script>
+
 </head>
 <body>
 <header>
@@ -72,11 +85,25 @@
     <div class="product">
         <h3>Saging (Lakatan)</h3>
         <p>Price: ₱70 per kilo</p>
-        <p> If you buy half kilo, just pm us on our Facebook page.Thank you.</p>
         <label for="saging-quantity">Quantity:</label>
         <input type="number" id="saging-quantity" name="saging-quantity" min="1" value="1">
     </div>
+    <div class="product">
+        <h3>Bitter Gourd (Ampalaya)</h3>
+        <p>Price: ₱70 per kilo</p>
+        <label for="bitter-gourd-quantity">Quantity:</label>
+        <input type="number" id="bitter-gourd-quantity" name="bitter-gourd-quantity" min="1" value="1">
+    </div>
+    <div class="product">
+        <h3>Kangkong</h3>
+        <p>Price: ₱15 per kilo</p>
+        <label for="kangkong-quantity">Quantity:</label>
+        <input type="number" id="kangkong-quantity" name="kangkong-quantity" min="1" value="1">
+    </div>
     <p id="total-payment"></p>
+</section>
+
+    
 </section>
 <section id="about">
     <h2>About Us</h2>
@@ -90,7 +117,7 @@
 <section id="contact">
     <h2>Contact Us</h2>
     <p>Phone: 09554807904</p>
-    <p>For more inquiries, just message us on our <a href="https://www.facebook.com/profile.php?id=61561525877874" target="_blank">JenJeljea FACEBOOK Page</a>.</p>
+    <p>For more inquiries, just Dm us on our <a href="https://www.facebook.com/profile.php?id=61561525877874" target="_blank">JenJeljea FACEBOOK Page</a>.</p>
 </section>
 
 <section id="order">
